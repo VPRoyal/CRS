@@ -1,0 +1,24 @@
+:root{
+    --grey_black:#39424E;
+    --yellow:#FBC02A;
+    --blue:#1234CE;
+    --purple:#302B63;
+}
+* {
+    box-sizing: border-box;
+    position: relative;
+  }
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+

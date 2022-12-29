@@ -1,0 +1,32 @@
+.navbox{
+    padding: 5px;
+    background-color: blue;
+    display: flex;
+    border-bottom: 2px black solid;
+    column-gap: 5px;
+}
+
+/* ---->>>> Logo Portion */
+#logo{
+    display: inline-block;
+    width: 5%;
+    min-width: 80px;
+    min-height: 80px;
+    background-color: red;
+}
+#logo img{
+    width: 100%;
+    /* object-fit: fill;
+    object-position: center; */
+}
+
+
+#title{
+    background-color: white;
+    display: table;
+}
+#title h1{
+    display: table-cell;
+    margin: 0px;
+    vertical-align: middle;
+}
