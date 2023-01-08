@@ -1,0 +1,220 @@
+@media only screen and (min-width: 1020px){
+/* UNIVERSAL SECTIONS */
+.desc{
+    width: 500px;
+    display: none;
+    z-index: 1;
+    padding: 2px 5px;
+    word-wrap: break-word;
+    /* overflow: hidden; */
+    border: solid 1px var(--blue);
+    border-radius: 2px;
+    /* border-top-left-radius: 0; */
+    background-color: white;
+    color: black;
+    position: absolute;
+    top: 15px;
+    left: 5px;
+}
+.desc::after{
+    content: "";
+  position: absolute;
+  transform-origin: center;
+  border-collapse: collapse;
+  top: -10px;
+  left: 15px;
+  transform: rotate(45deg) translate(0%,50%);
+  /* transform: translate(10px,-20px); */
+  width: 10px;
+    height: 10px;
+    background: white;
+    border: solid 1px var(--blue);
+    border-bottom: 0;
+    border-right: 0;
+}
+
+
+
+
+
+
+
+/* MAIN CONTAINER */
+.box{
+ display: block;
+}
+
+.main{
+    display: flex;
+    border: solid 1px black;
+}
+.main div{
+    display: flex;
+    border: solid 1px black;
+}
+
+/* ID section is started from here. */
+#id{
+    display: flex;
+    width:13%;
+    flex-shrink: 0;
+    column-gap: 5px;
+    padding: 2px 5px;
+}
+#id p{
+    display: flex;
+    column-gap: 5px;
+    flex-shrink: 0;
+}
+#id p:first-child{
+    min-width: fit-content;
+}
+#id p:last-child span{
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--yellow);
+}
+#id p:last-child span:first-child{
+    cursor: pointer;
+}
+
+/* TITLE Section starts from here */
+#title{
+    padding: 2px 5px;
+    min-width: 25%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+#title:hover{
+    overflow: visible;
+    white-space: unset;
+}
+#title:hover span{
+    display: inline-block;
+}
+/* BODY Section starts from here */
+#body{
+    display: flex;
+    min-width: 50%;
+}
+}
+
+
+#left{
+    width: 40%;
+}
+#details{
+    /* column-gap: 5px; */
+    width: 100%;
+    border: none;
+    flex-shrink: 0;
+}
+#details div{
+    flex-shrink: 0;
+    padding: 2px 5px;
+}
+#date{
+    width: 100px;
+}
+#section{
+    width: calc(100% - 100px);
+}
+#right{
+    padding: 2px 5px;
+    width: 60%;
+}
+#right span{
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+
+}
+#footer{
+    min-width: fit-content;
+}
+#footer div{
+    padding: 2px 5px;
+}
+
+
+
+
+#thread{
+    display: none;
+}
+/* For short sizes */
+@media only screen and (max-width: 1020px){
+    .main{
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+        border: solid 1px rgba(18, 52, 206,0.3);
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        padding: 10px;
+    }
+    #id{
+        display: flex;
+        /* border-bottom: solid 2px var(--yellow); */
+        justify-content: space-between;
+    }
+    #id p:first-child span{
+        color: var(--black);
+        font-weight: 600;
+        font-family: serif;
+    }
+    #id p:last-child{
+        display: flex;
+        column-gap: 10px;
+        align-items: center;
+    }
+    #id p:last-child span{
+        width: 18px;
+        height: 18px;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--yellow);
+    }
+    #id p:last-child span:first-child{
+        cursor: pointer;
+    }
+    #title{
+        color: var(--blue);
+    }
+    #body{
+        display: flex;
+        margin-top: 15px;
+        /* border: solid 2px blue; */
+    }
+    #left{
+        display: inline-block;
+        width: 40%;
+        flex-shrink: 0;
+    }
+    #section{
+        color: var(--yellow);
+        font-weight: 600;
+    }
+    #right{
+        display: inline-block;
+        font-size: 14px;
+        border: solid 1px rgba(32, 36, 39,0.3);
+        border-radius: 5px;
+        padding: 2px 5px;
+    }
+    #footer{
+        border-top:solid 1px rgba(18, 52, 206,0.3) ;
+        margin-top: 10px;
+        padding-top: 5px;
+        display: flex;
+        justify-content: space-between;
+    }
+    #thread{
+        display: none;
+    }
+}

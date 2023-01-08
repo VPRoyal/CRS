@@ -8,7 +8,11 @@ export default class Nav extends Component {
             <img src="./Mnit_trans.png" alt=""/>
         </div>
         <div id={styles.title}>
-            <h1>Complaint Redressal Portal</h1>
+            <h1>Request Redressal System</h1>
+            <h3>(A Portal to lodge complaints and provide suggestions)</h3>
+        </div>
+        <div id={styles.account} >
+          <a href=""><span>Signin/Signup</span></a>
         </div>
       </div>
     )

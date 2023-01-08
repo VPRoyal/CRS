@@ -1,9 +1,9 @@
 .navbox{
-    padding: 5px;
-    background-color: blue;
+    padding: 5px 10px;
+    /* background-color: blue; */
     display: flex;
-    border-bottom: 2px black solid;
-    column-gap: 5px;
+    column-gap: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* ---->>>> Logo Portion */
@@ -12,7 +12,7 @@
     width: 5%;
     min-width: 80px;
     min-height: 80px;
-    background-color: red;
+    /* background-color: red; */
 }
 #logo img{
     width: 100%;
@@ -20,13 +20,49 @@
     object-position: center; */
 }
 
-
+/* ---->>>> Title Portion */
 #title{
-    background-color: white;
-    display: table;
+    color: var(--blue);
+    padding-top: 10px;
 }
-#title h1{
-    display: table-cell;
-    margin: 0px;
-    vertical-align: middle;
+#title h3{
+    color: var(--black);
+}
+
+
+/* ---->>>> Account portion */
+#account{
+    display: flex;
+    margin-left: auto;
+}
+#account a{
+    align-self: center;
+    padding: 8px;
+    border-radius: 5px;
+    border: solid 1px rgba(18, 52, 206,0.3);
+    background-size: 100% 202%;
+    background-repeat: no-repeat;
+    background-position: 100% 0;
+    background-image: linear-gradient(to top ,var(--blue) 50%, transparent 50%);
+    /* color: var(--blue); */
+    font-weight: 600;
+    transition: background-position 0.5s;
+}
+#account a:hover{
+    background-position: 100% 100%;
+    /* color: white; */
+}
+#account a span{
+    background: linear-gradient(to top, white 50%, var(--blue) 50%);
+    background-size: 100% 200%;
+    background-repeat: no-repeat;
+    background-position: 100% 0%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    transition: background-position 0.5s;
+}
+#account a:hover span{
+    background-position: 100% 100%;
+
 }
