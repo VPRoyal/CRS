@@ -3,7 +3,7 @@ import styles from './nav.module.css'
 export default class Nav extends Component {
   render() {
     return (
-      <div className={styles.navbox} >
+      <div id={styles.navbox} >
         <div id={styles.logo}>
             <img src="./Mnit_trans.png" alt=""/>
         </div>

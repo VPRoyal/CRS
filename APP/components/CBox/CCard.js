@@ -33,6 +33,7 @@ export default class CCard extends Component {
           </div>
           <div id={styles.right}>
             <span>Description related to complaint will be posted here. Can be small or large. So, here it is the largest scam here. and I'm building a website out of it.</span>
+            <span className={styles.desc}>Description related to complaint will be posted here. Can be small or large. So, here it is the largest scam here. and I'm building a website out of it.</span>
           </div>
         </div>
         <div id={styles.footer}>

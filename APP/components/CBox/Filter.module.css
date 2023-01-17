@@ -1,0 +1,209 @@
+#title{
+    border-bottom: solid rgba(32, 36, 39,0.3) 2px;
+    text-align: center;
+    padding: 5px 0px;
+    margin: 0px 40px;
+}
+#body{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.boxes{
+    border: 1px solid var(--border_black);
+    user-select: none;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.boxes h4{
+    padding: 5px;
+    background-color: var(--yellow);
+    border-radius: 0px;
+    color: white;
+}
+
+#status div{
+    padding: 20px 2px;
+    display: flex;
+    justify-content: space-evenly;
+}
+#status div input{
+    display: none;
+}
+#status div label{
+    border: solid 1px var(--border_black);
+    padding: 5px 10px;
+    color: rgba(0, 0, 0, 0.6);
+    border-radius: 25px;
+    cursor: pointer;
+}
+#status div label:hover{
+    border-color: rgba(18, 52, 206,0.6);
+    color: rgba(18, 52, 206,0.6);
+}
+#status div input:checked+label{
+    background-color: rgba(18, 52, 206,0.8);
+    color: white;
+}
+
+#date h4+div{
+    padding: 20px 2px;
+    display: flex;
+    justify-content: space-evenly;
+}
+#date div div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    row-gap: 5px;
+}
+#date input[type="date"]{
+    background-color: rgba(18, 52, 206,0.8);
+    font-family: "Roboto Mono",monospace;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+#date input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: white;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+/* Section area Starts from here ---------->>>>>>>>*/
+#items{
+    padding: 0px 5px;
+}
+#items ul{
+    display: flex;
+    row-gap: 5px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#items ul li{
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: rgba(32, 36, 39,0.8);
+    color: white;
+}
+#items ul li span:last-child{
+    display: flex;
+    width: 12px;
+    height: 12px;
+    align-items: center;
+    position: absolute;
+    cursor: pointer;
+    right: 0;
+    top: 0;
+}#items ul li span:last-child svg, #items ul li span:last-child svg path{
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+}
+#section h4+div{
+    padding: 20px 2px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+#add{
+    display: flex;
+    justify-content: center;
+}
+#section div div div{
+    /* border: solid 1px black; */
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+}
+#add ul:first-child{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(18, 52, 206,0.8);
+    color: white;
+    font-weight: 600;
+    padding: 5px 5px;
+    border-radius: 2px;
+    width: fit-content;
+    column-gap: 20px;
+    min-width: 130px;
+    vertical-align: middle;
+}
+#add input[type="checkbox"]{
+    display: none;
+}
+#add input[type="checkbox"]:checked+label svg:first-child{
+    display: none;
+}
+#add input[type="checkbox"]:checked+label svg:last-child{
+    display: unset;
+}
+#add svg:last-child{
+    display: none;
+}
+#add ul:first-child label{
+    display: flex;
+    align-items: center;
+}
+#add ul:first-child label:last-child{
+    cursor: pointer;
+}
+#add ul:first-child label svg{
+    width: 20px;
+    height: 20px;
+}
+#add ul:last-child{
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    max-height: 98px;
+    overflow: scroll;
+    z-index: 100;
+    top: calc( 100% + 4px );
+    border: solid 1px var(--border_blue);
+    flex-direction: column;
+}
+#add ul:last-child li{
+    padding: 2px 5px;
+    display: table-cell;
+    border-collapse: collapse;
+    border: solid 1px var(--border_blue);
+    cursor: pointer;
+}
+#add ul:last-child li:hover{
+    color: white;
+    background-color: rgba(18, 52, 206,0.8);
+}
+
+
+#footer{
+    margin-top: 20px;
+    display: flex;
+    column-gap: 10px;
+    justify-content: center;
+}
+#footer button{
+    padding: 10px;
+    width: 100%;
+    font-weight: 600;
+    font-size: 18px;
+    color: white;
+    background-color: rgba(251, 192, 42,0.9);
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid var(--border_black);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+#footer button:hover{
+    background-color: rgba(251, 192, 42,1);
+}
+#footer button:active{
+    background-color: var(--purple);
+}
+

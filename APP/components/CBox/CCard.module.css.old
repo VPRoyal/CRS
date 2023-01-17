@@ -1,0 +1,154 @@
+@media only screen and (min-width: 1020px){
+/* UNIVERSAL SECTIONS */
+.desc{
+    width: 500px;
+    display: none;
+    z-index: 1;
+    padding: 2px 5px;
+    word-wrap: break-word;
+    /* overflow: hidden; */
+    border: solid 1px var(--blue);
+    border-radius: 2px;
+    /* border-top-left-radius: 0; */
+    background-color: white;
+    color: black;
+    position: absolute;
+    top: 15px;
+    left: 5px;
+}
+.desc::after{
+    content: "";
+  position: absolute;
+  transform-origin: center;
+  border-collapse: collapse;
+  top: -10px;
+  left: 50%;
+  transform: rotate(45deg) translate(0%,50%);
+  /* transform: translate(10px,-20px); */
+  width: 10px;
+    height: 10px;
+    background: white;
+    border: solid 1px var(--blue);
+    border-bottom: 0;
+    border-right: 0;
+}
+
+
+
+
+
+
+
+/* MAIN CONTAINER */
+.box{
+ display: block;
+}
+
+.main{
+    display: flex;
+    border: solid 1px black;
+}
+.main div{
+    display: flex;
+    border: solid 1px black;
+}
+
+/* ID section is started from here. */
+#id{
+    display: flex;
+    width:13%;
+    flex-shrink: 0;
+    column-gap: 5px;
+    padding: 2px 5px;
+}
+#id p{
+    display: flex;
+    column-gap: 5px;
+    flex-shrink: 0;
+}
+#id p:first-child{
+    min-width: fit-content;
+}
+#id p:last-child span{
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--yellow);
+}
+#id p:last-child span:first-child{
+    cursor: pointer;
+}
+
+/* TITLE Section starts from here */
+#title{
+    padding: 2px 5px;
+    min-width: 25%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+#title:hover{
+    overflow: visible;
+    white-space: unset;
+}
+#title:hover span{
+    display: inline-block;
+}
+/* BODY Section starts from here */
+#body{
+    display: flex;
+    min-width: 50%;
+}
+
+
+#left{
+    width: 40%;
+}
+#details{
+    /* column-gap: 5px; */
+    width: 100%;
+    border: none;
+    flex-shrink: 0;
+}
+#details div{
+    flex-shrink: 0;
+    padding: 2px 5px;
+}
+#date{
+    width: 100px;
+}
+#section{
+    width: calc(100% - 100px);
+}
+#right{
+    padding: 2px 5px;
+    width: 60%;
+}
+#right span:first-child{
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+
+}
+#right:hover span:last-child{
+    display: inline-block;
+    width: 70%;
+    min-width: 300px;
+}
+#footer{
+    min-width: fit-content;
+}
+#footer div{
+    padding: 2px 5px;
+}
+
+
+
+
+#thread{
+    display: none;
+}
+}
