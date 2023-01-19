@@ -6,8 +6,12 @@ module.exports = {
             destination:'/account/'
         },
         {
+            source:'/account/create',
+            destination:'/account/registration'
+        },
+        {
             source:'/account/signup',
-            destination:'/account/'
+            destination:'/account/registration/'
         }
     ]
 }
