@@ -1,4 +1,4 @@
-import React from 'react'
+import Link from 'next/link'
 import styles from './account.module.css'
 export default function login() {
     return (
@@ -33,7 +33,7 @@ export default function login() {
 
                     <div className={styles.footer} >
                         <div className={styles.button} ><input type="button" name="" value="Login Now" /></div>
-                        <div className={styles.account} ><span>Don't have an account?</span><span><a href="">Signup now</a></span></div>
+                        <div className={styles.account} ><span>Don't have an account?</span><span><Link href="/account/registration/">Signup now</Link></span></div>
                     </div>
                 </form>
             </div>
