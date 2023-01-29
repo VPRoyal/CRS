@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import Link from "next/link"
-import styles from './nav.module.css'
+import styles from './header.module.css'
 export default class Nav extends Component {
   render() {
     return (
@@ -13,7 +13,7 @@ export default class Nav extends Component {
             <h3>(A Portal to lodge complaints and provide suggestions)</h3>
         </div>
         <div id={styles.account} >
-          <Link href="/account/" ><span>Signin/Signup</span></Link>
+          <Link href="/account/" ><span>Login</span></Link>
         </div>
       </div>
     )
