@@ -1,7 +1,10 @@
 .wrap{
-    background-color: var(--blue);
-    padding: 10px;
-    padding-bottom: 0px;
+    background-color: white;
+    padding: 0px 40px;
+
+    flex-direction: row;
+    display: flex;
+    align-items: flex-end;
 }
 .box{
     display: inline-block;
@@ -19,27 +22,31 @@
 }
 .box ul li{
     /* border: solid 1px black; */
-    
+    color: var(--black);
     padding: 0px 10px;
     cursor: pointer;
+    user-select: none;
+}
+.box ul .active{
+    color: white;
 }
 .selector{
 position: absolute;
 height: 100%;
-width: var(--Cwidth);
-left: var(--CPos);
+width: var(--width);
+left: var(--pos);
 top: 0px;
 border-top-left-radius: 15px;
 border-top-right-radius: 15px;
-background-color: white;
+background-color: var(--black);
 /* animation: move 1s forwards; */
 }
 #animate{
     animation: move 0.6s forwards;
 }
 #animateEnd{
-    left: var(--CPos);
-    width: var(--Cwidth);
+    left: var(--pos);
+    width: var(--width);
 }
 @keyframes move {
     0% {
@@ -63,7 +70,7 @@ background-color: white;
 position: absolute;
 width: 25px;
 height: 25px;
-background-color: white;
+background-color: var(--black);
 right: 100%;
 bottom: 0px;
 }
@@ -73,7 +80,7 @@ position: absolute;
 width: 50px;
 height: 50px;
 border-radius: 50%;
-background-color: var(--blue);
+background-color: white;
 bottom: 0;
 left: -25px;
 }
@@ -81,7 +88,7 @@ left: -25px;
 position: absolute;
 width: 25px;
 height: 25px;
-background-color: white;
+background-color: var(--black);
 left: 100%;
 bottom: 0px;
 }
@@ -91,7 +98,7 @@ position: absolute;
 width: 50px;
 height: 50px;
 border-radius: 50%;
-background-color: var(--blue);
+background-color: white;
 bottom: 0;
 right: -25px;
 }

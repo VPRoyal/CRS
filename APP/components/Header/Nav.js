@@ -2,7 +2,7 @@ import { useRef,useState, useEffect } from 'react'
 import {useRouter} from 'next/router'
 import Link from 'next/link'
 import styles from './nav.module.css'
-const links=[{"text":"Dashboard","path":"",},{"text":"Profile","path":"profile"},{"text":"Complain!","path":"complain"},{"text":"Test","path":"test"}]
+const links=[{"text":"Dashboard","path":"",},{"text":"Profile","path":"/profile"},{"text":"Complain!","path":"/complain"}]
 export default function Nav() {
     const router=useRouter()
     const selector = useRef()
@@ -23,18 +23,20 @@ export default function Nav() {
     }
     const removeAnimation= ()=>{
         setPos(false)
+        handleOnload()
      }
     const handleChange = (e) => {
         var tar = e.target
-        if (tar.tagName == "LI") {
-            animate(selector.current, tar)
+        console.log(tar)
+        if (tar.tagName == "A") {
+            animate(selector.current, tar.parentElement)
         }
     }
     const handleOnload=()=>{
-        let tar=link.current.children.active
-        let elem=selector.current
-        elem.style.setProperty('--Cwidth',tar.offsetWidth+'px')
-        elem.style.setProperty('--CPos',tar.offsetLeft+'px')
+        var tar=link.current.children.active
+        var elem=selector.current
+        elem.style.setProperty('--width',tar.offsetWidth+'px')
+        elem.style.setProperty('--pos',tar.offsetLeft+'px')
     }
     useEffect(() => {
         //Onload Management----->>>>>
@@ -48,6 +50,7 @@ export default function Nav() {
       }, []);
     return (
         <div className={styles.wrap} >
+            {console.log("hi")}
             <div className={styles.box} >
                 <div ref={selector} id={Pos?styles.animate:styles.animateEnd} className={styles.selector}>
                     <div className={styles.left} ></div>
@@ -56,7 +59,8 @@ export default function Nav() {
                 <ul ref={link} onClick={handleChange} >
                     {
                         links.map((val,index)=>{
-                            return(<li key={index} name={router.asPath===("/"+val.path)?'active':null} ><Link href={"/dashboard/"+val.path}>{val.text}</Link></li>)
+                            var active=router.asPath===("/dashboard"+val.path)?'active':null
+                            return(<li key={index} name={active} className={styles[active]} ><Link href={"/dashboard"+val.path}>{val.text}</Link></li>)
                         })
                     }
                 </ul>

@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Header from '../components/Header/header'
 import CContainer from '../components/CBox/CContainer'
 export default function Home() {
     return(
@@ -7,10 +6,9 @@ export default function Home() {
       <Head>
         <meta charSet="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>CRS Portal</title>
+        <title>CRS &#x2022; Portal</title>
         <link rel="icon" href="/Mnit_trans.png" type="image/x-icon"/>
       </Head>
-      <Header/>
       <CContainer/>
       </>
     )
