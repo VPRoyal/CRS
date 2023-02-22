@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Nav from '../components/Header/Nav'
+import Request from '../components/Dashboard/request'
 export default function Home() {
     return(
       <>
@@ -9,7 +9,7 @@ export default function Home() {
         <title>Test Design</title>
         <link rel="icon" href="/Mnit_trans.png" type="image/x-icon"/>
       </Head>
-        <Nav/>
+        <Request/>
       </>
     )
   }

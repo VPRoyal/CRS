@@ -1,0 +1,31 @@
+.main{
+    /* border: solid 1px black; */
+    padding:30px 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+.header{
+    /* border: solid 1px black; */
+    margin-bottom: 20px;
+    color: var(--black);
+}
+.header::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    height: 4px;
+    width: 42px;
+    background-color: var(--yellow);
+    border-radius: 10px;
+}
+.body{
+    /* border: solid 1px black; */
+}
+.container{
+    /* border: solid 1px black; */
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}

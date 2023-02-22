@@ -60,7 +60,6 @@ export default class CCard extends Component {
               </span>
             </div>
             <div><span>Pending</span></div>
-            
           </div>
         </div>
         <div id={styles.thread}>

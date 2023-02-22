@@ -27,7 +27,6 @@ export default function Nav() {
      }
     const handleChange = (e) => {
         var tar = e.target
-        console.log(tar)
         if (tar.tagName == "A") {
             animate(selector.current, tar.parentElement)
         }
