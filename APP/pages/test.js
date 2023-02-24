@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Request from '../components/Dashboard/request'
+import Select from '../components/Customs/Select'
 export default function Home() {
     return(
       <>
@@ -9,7 +10,7 @@ export default function Home() {
         <title>Test Design</title>
         <link rel="icon" href="/Mnit_trans.png" type="image/x-icon"/>
       </Head>
-        <Request/>
+        <Select title="Add Section" options={["DSW", "Academic","Sports","Scholarship","ID Card"]} callback={(val)=>{console.log(val)}}/>
       </>
     )
   }
