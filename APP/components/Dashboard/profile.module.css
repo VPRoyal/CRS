@@ -1,0 +1,97 @@
+.wrapper{
+    padding: 20px;
+    color: var(--black);
+}
+.box{
+    padding: 10px 0px;
+}
+.head{
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    column-gap: 25px;
+}
+.head span{
+    width: 1em;
+    display: flex;
+    height: 35px;
+    width: 35px;
+}
+.head span svg, .head span path{
+    width: 100%;
+    height: 100%;
+}
+
+.head h2::after{
+    content: '';
+    position: absolute;
+    width: 1.8em;
+    height: 4px;
+    border-radius: 20px;
+    bottom:-8px;
+    left: 0px;
+    background-color: var(--blue);
+}
+.form{
+    border: solid 1px var(--border_blue);
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 50%;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+.column{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.column h4{
+    font-size: 14px;
+    color: var(--grey_black);
+    font-weight: 300;
+}
+.column input{
+    width: 100%;
+    max-width: 250px;
+    min-width: 200px;
+    padding: 5px 10px;
+    font-weight: 600;
+    color: var(--black2);
+    font-size: 12px;
+    border-radius: 5px;
+    border: solid 1px var(--border_black);
+}
+.column input:focus{
+    outline-color: var(--grey_black);
+}
+.column input:disabled{
+    background-color: var(--border_black);
+    border: none;
+}
+.button{
+    display: flex;
+    width: fit-content;
+    margin-top: 20px;
+    padding: 10px 0px;
+    column-gap: 20px;
+    width: 50%;
+}
+.button button{
+    padding: 10px 40px;
+    border-radius: 5px;
+    border: solid 1px rgba(18, 52, 206,0.3);
+    background-color: var(--blue);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1em;
+}
+.button button:last-child{
+    background-color: var(--purple);
+}
+.button button:active{
+    background-color: var(--grey_black);
+}
