@@ -15,6 +15,7 @@
     --border_black:rgba(32, 36, 39,0.3);
     --border_blue:rgba(18, 52, 206,0.3) ;
     --border_yellow:rgba(251, 192, 42,0.3);
+    --border_purple:rgba(48, 43, 99,0.3);
 }
 * {
     box-sizing: border-box;

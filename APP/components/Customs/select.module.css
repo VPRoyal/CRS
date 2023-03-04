@@ -16,13 +16,13 @@
     min-width: 130px;
     vertical-align: middle;
 }
-.wrap input[type="checkbox"]{
+#select{
     display: none;
 }
-.wrap input[type="checkbox"]:checked+label svg:first-child{
+#select:checked+label svg:first-child{
     display: none;
 }
-.wrap input[type="checkbox"]:checked+label svg:last-child{
+#select:checked+label svg:last-child{
     display: unset;
 }
 .wrap svg:last-child{

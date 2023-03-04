@@ -8,7 +8,7 @@
     display: flex;
         flex-direction: column;
         row-gap: 5px;
-        border: solid 1px var(--border_black);
+        /* border: solid 1px var(--border_black); */
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         padding: 10px;

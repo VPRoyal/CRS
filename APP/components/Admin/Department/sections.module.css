@@ -1,0 +1,17 @@
+.wrapper{
+    /* border: solid 1px black; */
+    padding: 10px;
+}
+.head{
+    color: var(--black);
+    margin-bottom: 10px;
+}
+.body{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 20px;
+}
+
