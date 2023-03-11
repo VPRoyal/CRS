@@ -13,35 +13,35 @@ export default function profile() {
 </svg></span>
             </div>
             <form className={styles.form} >
-                <div className={styles.column} >
+                <div className={styles.column}>
                     <h4>Name</h4>
                     <input type="text"/>
                 </div>
-                <div className={styles.column} >
+                <div className={styles.column}>
                     <h4>ID</h4>
                     <input type="text"/>
                 </div>
-                <div className={styles.column} >
+                <div className={styles.column}>
                     <h4>Account Type</h4>
                     <input type="text"/>
                 </div>
-                <div className={styles.column} >
+                <div className={styles.column}>
                     <h4>Department</h4>
                     <input type="text"/>
                 </div>
-                <div className={styles.column} >
+                <div className={styles.column}>
                     <h4>Section</h4>
                     <input type="text"/>
                 </div>
-                <div className={styles.column} >
+                <div className={styles.column}>
                     <h4>Reporting officer</h4>
                     <input type="text" value="VP SINGH" disabled/>
                 </div>
-                <div className={styles.column} >
+                <div className={styles.column}>
                     <h4>Password</h4>
                     <input type="text"/>
                 </div>
-                <div className={styles.column} >
+                <div className={styles.column}>
                     <h4>Confirm Password</h4>
                     <input type="text"/>
                 </div>
