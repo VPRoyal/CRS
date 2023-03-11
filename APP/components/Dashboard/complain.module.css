@@ -57,7 +57,10 @@
     max-width: 600px;
     outline: none;
     border: solid 1px var(--border_blue);
-    border-radius: 2px;
+    border-radius: 5px;
+}
+.column input[type='text']:focus{
+    outline: solid 1px var(--blue);
 }
 #description textarea{
     width: 100%;
@@ -67,7 +70,10 @@
     resize: none;
     outline: none;
     padding: 5px;
-
+    border-radius: 5px;
+}
+#description textarea:focus{
+    outline: solid 1px var(--blue);
 }
 #type div{
     display: flex;
