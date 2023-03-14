@@ -40,14 +40,39 @@ const profile= new Schema({
     sections:[{
         id:String,
         level:Number,
-        reportingOfficer:String,
-        ratingValue:Number,
-        totalRated:Number,
-        active:Boolean,
+        reportingOfficers:[{
+            id:String,
+            name:String,
+            assignedDate:Date,
+            unassignedDate:Date
+        }],
+        overallRatingValue:Number,
+        ratings:[{
+            value:Number,
+            comment:String
+        }],
         assignedDate:Date,
-        closedDate:Date
+        unassignedDate:Date
     }]
     ,
+    activeSections:[{
+        id:String,
+        level:Number,
+        reportingOfficers:[{
+            id:String,
+            name:String,
+            assignedDate:Date,
+            unassignedDate:Date
+        }],
+        activereportingOfficers:{
+            id:String,
+            name:String,
+            assignedDate:Date,
+        },
+        ratingValue:Number,
+        totalRated:Number,
+        assignedDate:Date
+    }],
     ratings:{
         ratingValue:Number,
         totalRated:Number

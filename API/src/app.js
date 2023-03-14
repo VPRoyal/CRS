@@ -1,11 +1,32 @@
-import express from "express";
+const express=require("express"),
+      http=require("http"),
+      morgan=require("morgan"),
+      mongoose=require("mongoose")
+
+// Routers-------->>>>>
+const sectionRouter=require("./routes/section.router");
+const complaintRouter=require("./routes/complaint.router");
+const profileRouter = require("./routes/profile.router");
+
+
+const hostname="localhost", port=5000,url="mongodb://0.0.0.0:27017/general";
 const app = express();
-const port = 5000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+// MongoDB Connection ---------->>>>>
 
+mongoose.connect(url,{useNewUrlParser:true,useUnifiedTopology:true}) // useNewUrlParser:true,useUnifiedTopology:true,useCreateIndex: true
+const con=mongoose.connection
+con.on('open',()=>console.log("connected"))
+
+
+// Routing --------->>>>>
+app.use(express.static(__dirname+'/public'))
+// app.use("/sections",sectionRouter)
+// app.use("/complaint",complaintRouter)
+app.use("/profile",profileRouter)
+
+
+// Server Started -------->>>>>>.
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
