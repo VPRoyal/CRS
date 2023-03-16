@@ -1,23 +1,27 @@
 require('mongoose')
 // const auth = require("../middlewares/AuthJWT.mid")
-const {
-} = require("../services/profile.service")
+const {get_profiles, add_profile, update_profile, get_profile} = require("../services/profile.service")
 
 
-
-
-
-// exports.profile_get = async (req, res) => {
+exports.get_users = async (req, res) => {
     
-//         try {
-//             const Profile = await get_profile({ id: verify.id })
-//             res.json(Profile)
-//         }
-//         catch (err) {
-//             // res.status(500).send("Internal Server Error")
-//             res.status(500).send(err)
-//         }
-// }
+        try {
+            const Profile = await get_profiles({ id: verify.id })
+            res.json(Profile)
+        }
+        catch (err) {
+            // res.status(500).send("Internal Server Error")
+            res.status(500).send(err)
+        }
+}
+exports.get_user =async(req,res)=>{
+    try{
+        const Profile = await get_profiles({ id: req.params.id })
+    }
+    catch{
+
+    }
+}
 // exports.login = async (req, res) => {
 //     // Email should be validate here. Also parameters should be validate and filtered for any mongodb injection.
 //     // 
@@ -38,11 +42,23 @@ const {
 //         res.send("Error: " + err)
 //     }
 // }
-// exports.create = async (req, res) => {
-//     try {
-//         await create_profile(req.body.data)
-//         res.send("Success")
-//     } catch (err) {
-//         res.send("Error: " + err)
-//     }
-// }
+exports.create_user = async (req, res) => {
+    try {
+        await add_profile(req.body)
+        res.send("Success")
+    } catch (err) {
+        res.send("Error: " + err)
+    }
+}
+
+exports.change_pass =async (req,res)=>{
+    const filter= {"id":req.body.id}
+    const update={"password":req.body.pass}
+    try{
+        await update_profile({filter, update})
+        res.send("Success")
+    }
+    catch (err) {
+        res.send("Error: " + err)
+    }
+}

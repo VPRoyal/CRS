@@ -18,6 +18,9 @@ mongoose.connect(url,{useNewUrlParser:true,useUnifiedTopology:true}) // useNewUr
 const con=mongoose.connection
 con.on('open',()=>console.log("connected"))
 
+// For parsing data
+app.use(express.urlencoded({extended:true}))
+app.use(express.json())
 
 // Routing --------->>>>>
 app.use(express.static(__dirname+'/public'))

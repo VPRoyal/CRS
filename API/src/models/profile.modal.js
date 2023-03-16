@@ -1,11 +1,6 @@
-import { model, Schema } from "mongoose"
+const { model, Schema }=require('mongoose')
 
 const profile= new Schema({
-    _id:{
-        type:String,
-        unique:true,
-        index:true
-    },
     id:{
         type:String,
         required: true,
@@ -83,4 +78,4 @@ const profile= new Schema({
     }
 
 })
-export default model("Profile", profile)
+module.exports= model("Profile", profile)

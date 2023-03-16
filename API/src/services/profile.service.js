@@ -1,42 +1,46 @@
 require('mongoose') 
+const { query } = require('express')
 const Profile= require("../models/profile.modal")
+
+// GET Requests -------->>>>>>>>>
 const get_profiles= async (query)=>{
     var limit=query.limit || 10, skip=query.skip || 0
     if(query.hasOwnProperty("name")){
-        return Profile.find({"name":{$regex: '^' + query.name, $options: 'i'}}, 'locality city')
+        return Profile.find({"name":{$regex: '^' + query.name, $options: 'i'}}, 'id, name, post, accountType, contact, activeSections')
     }
-    return Profile.find().skip(parseInt(query.skip)).limit(parseInt(query.limit))
+    return Profile.find('id, name, post, accountType, contact, activeSections').skip(parseInt(skip)).limit(parseInt(limit))
 
+}
+const get_profile=async (query)=>{
+    if(query.id){
+        return Profile.findOne({"id":query.id},query.projection)
+    }
+}
+const check_profile =async (query)=>{
+    const user= await Profile.findOne({"id":query.id},"id password").exec()
+    if(user){
+        if(query.pass===user.password) return {message:"Success", auth:true}
+        return {message:"Incorrect password",auth:false}
+    }
+    return {message:"User not exist", auth:false}
 }
 
 
-// const get_profile = async (q)=>{
-//     const user = await Profile.find({_id:q.id},{pass:0,__v:0}).exec();
-//     if (user){
-//         return user
-//     } else {return {message:"Data not found"}}
-// }
-// const login_profile=async (query)=>{
-//         if(query.hasOwnProperty("email")&&query.hasOwnProperty("pass")){
-//             var user;
-//             user = await Profile.findOne({"email":query.email},'email pass').exec();   // Here second paramter is used for getting selective fields        
-//             if(user){
-//                 if(query.pass===user.pass) return {email:query.email,id:user._id, auth:true, message:"Success"}
-//                 return {message:"Password not correct", auth:false}
-//             } else  return {message:"User not exist", auth:false}
-//         }
-//         else return {message:"Credentials Incorrect", auth:false}
-// }
-// const create_profile=(data)=>{
-//     if(Array.isArray(data)){
-//         return Profile.insertMany(data,{ordered:false})
-//     }
-//     const profile = new Profile(data)
-//     return profile.save()
-// }
+// POST Requests --------->>>>>>>>>>
+const add_profile= async (data)=>{
+    const profile = new Profile(data)
+    return profile.save()
+}
 
+// PUT or UPDATE Requests ------->>>>>>>
+const update_profile=async(data)=>{
+let doc = await Profile.findOneAndUpdate(data.filter, data.update);
+console.log(doc)
+}
 module.exports={
+    get_profiles,
     get_profile,
-    login_profile,
-    create_profile
+    add_profile,
+    check_profile,
+    update_profile
 }
