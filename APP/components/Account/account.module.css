@@ -63,11 +63,12 @@ margin-bottom: 40px;
     border-color: var(--yellow);
 }
 .input svg, .input path{
-    color: rgba(32, 36, 39,0.7);
     width: 25px;
     height: 25px;
 }
-
+.visibility:hover{
+    cursor: pointer;
+}
 .input input{
     border: none;
     outline: none;
@@ -88,6 +89,10 @@ margin-bottom: 40px;
 .checkbox div:last-child{
     color: var(--blue);
 }
+.checkbox a:hover{
+cursor: pointer;
+text-decoration: underline;
+}
 .footer{
     display: flex;
     flex-direction: column;
@@ -96,7 +101,7 @@ margin-bottom: 40px;
 .button{
     width: 100%;
 }
-.button input{
+.button button{
     width: 100%;
     border: none;
     color: white;
@@ -117,4 +122,10 @@ margin-bottom: 40px;
 }
 .account a{
     color: var(--blue);
+}
+.account a:hover{
+    text-decoration: underline;
+}
+#remember{
+    cursor: pointer;
 }

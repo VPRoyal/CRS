@@ -75,6 +75,11 @@ const profile= new Schema({
     active:{
         type:Boolean,
         default:false
+    },
+    activeComplains:[String],
+    resolvedComplains:[String],
+    terms:{
+    type:Boolean
     }
 
 })

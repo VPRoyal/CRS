@@ -11,11 +11,13 @@ profileRouter.route("/")
 .get(profileControl.get_users)
 
 profileRouter.route("/:id")
-.get(profileControl.get_user)
+.get(profileControl.get_userById)
 
-// ROUTE on '/profile/account/' ------------->>>>>>>>>>
-profileRouter.route("/account/")
-.get(profileControl.login)
+// ROUTE on '/profile/login/' ------------->>>>>>>>>>
+profileRouter.route("/login")
+.post(profileControl.login)
+
+profileRouter.route("/register")
 .post(profileControl.register)
 
 profileRouter.route("/password")
