@@ -1,16 +1,7 @@
 require('mongoose') 
-const { query } = require('express')
 const Profile= require("../models/profile.modal")
 
 // GET Requests -------->>>>>>>>>
-// const get_profiles= async (query)=>{
-//     var limit=query.limit || 10, skip=query.skip || 0
-//     if(query.hasOwnProperty("name")){
-//         return Profile.find({"name":{$regex: '^' + query.name, $options: 'i'}}, 'id, name, post, accountType, contact, activeSections')
-//     }
-//     return Profile.find('id, name, post, accountType, contact, activeSections').skip(parseInt(skip)).limit(parseInt(limit))
-
-// }
 const get_profiles=async(query)=>{
     if(query.hasOwnProperty("skip")||query.hasOwnProperty("limit")){
         var limit=options.limit || 10, skip=options.skip || 0

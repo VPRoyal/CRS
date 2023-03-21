@@ -27,7 +27,7 @@ app.use(express.static(__dirname+'/public'))
 // app.use("/sections",sectionRouter)
 // app.use("/complaint",complaintRouter)
 app.use("/profile",profileRouter)
-app.use("/complaint",complaintRouter)
+app.use("/complain",complaintRouter)
 
 // Server Started -------->>>>>>.
 app.listen(port, () => {

@@ -1,3 +1,13 @@
 const express=require('express')
-const profileControl=require("../controllers/profile.controller")
-const profileRouter=express.Router();
+const complainControl=require("../controllers/complaint.controller")
+const complainRouter=express.Router();
+
+
+// ROUTE on '/complain/register' ------------->>>>>>>>>>
+complainRouter.route("/register/")
+.post(complainControl.register)
+
+
+
+
+module.exports=complainRouter;

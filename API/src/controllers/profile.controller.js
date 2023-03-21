@@ -26,13 +26,13 @@ res.status(500).send(err)
 }
 }
 exports.get_userById =async(req,res)=>{
+    console.log(req.query.accountType)
     try{
-        const Profile = await get_profiles({ id: req.params.id })
-        if(req.hasOwnProperty("accountType")){
-            var filters={id:req.id,},projections
-            if(req.accountType==="student")
+        if(req.query.hasOwnProperty("accountType")){
+            var filters={id:req.params.id,},projections
+            if(req.query.accountType==="student")
                 projections='id, name, activeComplains, pendingComplains contact'
-            else if(req.accountType==="authority")
+            else if(req.query.accountType==="authority")
                 projections='id, name, post, accountType, contact, activeSections'
             else
                 res.json({message:"Invalid Request", error:"true"})

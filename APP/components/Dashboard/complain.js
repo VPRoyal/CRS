@@ -2,16 +2,49 @@ import React, { useState, useRef } from 'react'
 import styles from './complain.module.css'
 import Select from '../Customs/Select'
 export default function complain() {
-    const [file, SetFile] = useState();
-    const [reset,SetReset]=useState(0)
+    const [file, setFile] = useState();
+    const [reset,setReset]=useState(0)
+    const [section,setSection]=useState(0)
+    const [submit, setSubmit]=useState(false)
     const Form =useRef()
     const handleReset=()=>{
         Form.current.reset()
-        SetReset((reset) => reset + 1)
-        SetFile(null)
+        setReset((reset) => reset + 1)
+        setFile(null)
     }
-    const handleSubmit=()=>{
-
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+        if(submit)
+            return null
+        setSubmit(true)
+        // Here I have to put some validations and entry of required fields.
+        var elem = Form.current.elements
+        const data={
+            id:"0034",
+            studentId:"2019UMT1500",
+            title:elem.title.value,
+            type:elem.radio1.checked?"public":"private",
+            section:section,
+            activeOfficer:"ID of active officer",
+            desc:elem.desc.value,
+            file:file
+        }
+        handleReset()
+        fetch('http://localhost:5000/complain/register/', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        }).then((res) => res.json())
+            .then((data) => {
+                setSubmit(false)
+                console.log(data)
+            })
+            .catch((err) => {
+                setSubmit(false)
+                console.log(err.message);
+            });
     }
     return (
         <div className={styles.wrapper} >
@@ -29,7 +62,7 @@ export default function complain() {
                 <form className={styles.form} ref={Form}>
                     <div className={styles.column} id={styles.title} >
                         <h3>Title</h3>
-                        <input type='text' name="" placeholder='Enter Title' />
+                        <input type='text' name="title" placeholder='Enter Title' />
                     </div>
                     <div className={styles.column} id={styles.type}>
                         <h3>Type of Complain</h3>
@@ -43,20 +76,20 @@ export default function complain() {
                     </div>
                     <div className={styles.column} id={styles.section}>
                         <h3>Concerned Section</h3>
-                        <Select reset={reset} title="Add Section" type="A" options={["DSW", "Academic", "Sports", "Scholarship", "ID Card"]} databack={(val) => { console.log(val) }} />
+                        <Select reset={reset} title="Add Section" type="A" options={["DSW", "Academic", "Sports", "Scholarship", "ID Card"]} databack={(val) => { setSection(val) }} />
                     </div>
                     <div className={styles.column} id={styles.description} >
                         <h3>Description</h3>
-                        <textarea placeholder='Enter Description' ></textarea>
+                        <textarea placeholder='Enter Description' name='desc'></textarea>
                     </div>
                     <div className={styles.column} id={styles.attachment}>
                         <h3>Any Document</h3>
                         <div>
                             <label for={styles.attach}>Select a file...</label>
-                            <input onChange={(e) => { SetFile(e.target.files[0]) }} type="file" name="" id={styles.attach} />
+                            <input onChange={(e) => { setFile(e.target.files[0]) }} type="file" name="" id={styles.attach} />
                         </div>
                         <div style={{ display: file ? "flex" : "none" }} >
-                            <span onClick={() => { SetFile(null) }} ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                            <span onClick={() => { setFile(null) }} ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                             </svg></span><span>Selected file: </span><span>{file ? file.name : ""}</span>
@@ -64,7 +97,7 @@ export default function complain() {
                     </div>
                 </form>
                 <div className={styles.button} >
-                    <button onClick={handleSubmit} type="submit">Submit</button>
+                    <button onClick={handleSubmit} type="submit">{submit?"Submitting...":"Submit"}</button>
                     <button onClick={handleReset} type="reset">Reset</button>
                 </div>
             </div>

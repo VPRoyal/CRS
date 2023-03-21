@@ -1,11 +1,6 @@
-import { model, Schema } from "mongoose"
+const { model, Schema }=require('mongoose')
 
 const complaint= new Schema({
-    _id:{
-        type:String,
-        unique:true,
-        index:true
-    },
     id:{
         type:String,
         required: true,
@@ -28,9 +23,15 @@ const complaint= new Schema({
         type:String,
         required: true,
     },
+    section:[String],
     activeOfficer:{
         type:String,
         required: true,
+    },
+    officer:[String],
+    level:{
+        type:Number,
+        default:1
     },
     studentId:{
         type:String,
@@ -53,4 +54,4 @@ const complaint= new Schema({
         }
     ]
 })
-export default model("Complaint", complaint)
+module.exports= model("Complaint", complaint)
