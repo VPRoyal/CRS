@@ -5,8 +5,7 @@ export default function authorityItem() {
     <div className={styles.body} >
                 <div className={styles.item} ><span>Name &#x2022; ID</span><span>Post</span></div>
                 <div className={styles.item} ><Select title="Add Section" type="A" options={["DSW", "Academic", "Sports", "Scholarship", "ID Card"]} databack={(val) => { console.log(val) }} /></div>
-                <div className={styles.item} ><Select title="Add Section" type="A" options={["DSW", "Academic", "Sports", "Scholarship", "ID Card"]} databack={(val) => { console.log(val) }} /></div>
-                <div className={`${styles.item} ${styles.level}`} ><span><input type="text" name="" pattern='[1-4]{1}' onInput={(e)=>{!e.target.validity.patternMismatch||(e.target.value='')}}/></span></div>
+                <div className={styles.item} ><span>Section &#x2022; L2</span></div>
                 <div className={`${styles.item} ${styles.contact}`} >
                     <div><span>Mobile: </span><input type="number" name="" disabled /></div>
                     <div><span>Email: </span><input type="email" name="" /></div>

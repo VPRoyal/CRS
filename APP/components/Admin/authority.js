@@ -11,8 +11,7 @@ export default function authority() {
                 <div className={styles.head} >
                     <div className={styles.item} ><span>Name ID Post</span></div>
                     <div className={styles.item} ><span>Department</span></div>
-                    <div className={styles.item} ><span>Section</span></div>
-                    <div className={styles.item} ><span>Level</span></div>
+                    <div className={styles.item} ><span>Section / Level</span></div>
                     <div className={styles.item} ><span>Contact</span></div>
                     <div className={styles.item} ><span>Action</span></div>
                 </div>

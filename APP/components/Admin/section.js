@@ -1,8 +1,60 @@
+import { useState, useRef } from 'react'
+import axios from 'axios'
 import styles from './section.module.css'
 import Select from '../Customs/Select'
 export default function section() {
+  const departmentForm = useRef()
+  const sectionForm = useRef()
+  const [departID, setDepartID] = useState(null)
+  // const [depart, setDepart]=useState(false)
+  // const [sec, setSec]=useState(false)
+  const handleReset = (e) => {
+    var elem = e.target
+    if (elem.name === "department")
+      departmentForm.current.reset()
+    else if (elem.name === "section") {
+      sectionForm.current.reset()
+      setDepartID(null)
+    }
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    var elem = e.target
+    const depart = departmentForm.current.elements
+    const sec = sectionForm.current.elements
+    var field = false
+    if (elem.name === "department") field = true
+    else if (elem.name !== "section") return
+    elem.innerHTML="Submitting..."
+    const department = {
+      departID: field?depart.departID.value:departID,
+      departName:field?depart.departName.value:"",
+      departDescription: field?depart.description.value:"",
+      section:[]
+    }
+    const section = {
+      secID: field?depart.secID.value:sec.secID.value,
+      secName: field?depart.secName.value:sec.secName.value,
+      function: field?depart.function.value:sec.function.value
+    }
+    const data = {
+      section: section,
+      department: department,
+      field: field ? "department" : "section"
+    }
+    axios.post('http://localhost:5000/department/',data)
+      .then((res) => {
+        elem.innerHTML="Submit"
+      })
+      .catch((err) => {
+        elem.innerHTML="Submit"
+      });
+
+  }
   return (
-    <div className={styles.wrapper} >
+    <div classNam
+    
+    e={styles.wrapper} >
       <div className={styles.box} >
         <div className={styles.head} >
           <h2>Add Department</h2>
@@ -13,35 +65,35 @@ export default function section() {
             </svg>
           </span>
         </div>
-        <form className={styles.form} >
-          <div className={styles.column}>
+        <form className={styles.form} ref={departmentForm} >
+          <div className={styles.column} >
             <h4>Department Name</h4>
-            <input type="text" />
+            <input type="text" name="departName" />
           </div>
-          <div className={styles.column}>
+          <div className={styles.column} >
             <h4>Section Name</h4>
-            <input type="text" />
+            <input type="text" name="secName" />
           </div>
-          <div className={styles.column}>
+          <div className={styles.column} >
             <h4>Department ID</h4>
-            <input type="text" />
-          </div>
-          <div className={styles.column}>
+            <input type="text" name="departID" />
+          </div>+
+          <div className={styles.column} >
             <h4>Section ID</h4>
-            <input type="text" />
+            <input type="text" name="secID" />
           </div>
           <div className={styles.column}>
             <h4>Department description</h4>
-            <textarea rows="8" >Hi, this is vinay</textarea>
+            <textarea rows="8" name='description' >Hi, this is vinay</textarea>
           </div>
-          <div className={styles.column}>
+          <div className={styles.column} >
             <h4>Section functions</h4>
-            <textarea rows="8" >Hi, this is vinay</textarea>
+            <textarea rows="8" name="function">Hi, this is vinay</textarea>
           </div>
         </form>
         <div className={styles.button} >
-          <button type="submit">Save</button>
-          <button type="reset">Cancel</button>
+          <button type="submit" name='department' onClick={handleSubmit}>Submit</button>
+          <button type="reset" name='department' onClick={handleReset}>Reset</button>
         </div>
       </div>
       <div className={styles.box} >
@@ -53,27 +105,27 @@ export default function section() {
             </svg>
           </span>
         </div>
-        <form className={styles.form} >
-          <div className={styles.column}>
+        <form className={styles.form} ref={sectionForm} >
+          <div className={styles.column} >
             <h4>Section Name</h4>
-            <input type="text" />
+            <input type="text" name="secName" />
           </div>
           <div className={styles.column}>
             <h4>Section ID</h4>
-            <input type="text" />
+            <input type="text" name="secID" />
           </div>
           <div className={styles.column}>
             <h4>Department</h4>
-            <Select title="Add Section" type="A" options={["DSW", "Academic", "Sports", "Scholarship", "ID Card"]} databack={(val) => { console.log(val) }} />
+            <Select title="Add Section" type="A" options={["DSW", "Academic", "Sports", "Scholarship", "ID Card"]} databack={(val) => { setDepartID(val) }} />
           </div>
           <div className={styles.column}>
             <h4>Functions</h4>
-            <textarea rows="8" >Hi, this is vinay</textarea>
+            <textarea rows="8" name="function" >Hi, this is vinay</textarea>
           </div>
         </form>
         <div className={styles.button} >
-          <button type="submit">Save</button>
-          <button type="reset">Cancel</button>
+          <button type="submit" name='section' onClick={handleSubmit} >Submit</button>
+          <button type="reset" name='section' onClick={handleReset}>Reset</button>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ const get_complain = async (query)=>{
 }
 
 
-// POST Requests ------>>>>>>>>>.
+// POST Requests ------>>>>>>>>>
 const add_complain =async (query)=>{
     const complain = new Complain(query)
     return complain.save()

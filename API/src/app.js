@@ -4,7 +4,7 @@ const express=require("express"),
       mongoose=require("mongoose")
 
 // Routers-------->>>>>
-const sectionRouter=require("./routes/section.router");
+const departmentRouter=require("./routes/department.router");
 const complaintRouter=require("./routes/complaint.router");
 const profileRouter = require("./routes/profile.router");
 
@@ -24,10 +24,9 @@ app.use(express.json())
 
 // Routing --------->>>>>
 app.use(express.static(__dirname+'/public'))
-// app.use("/sections",sectionRouter)
-// app.use("/complaint",complaintRouter)
 app.use("/profile",profileRouter)
 app.use("/complain",complaintRouter)
+app.use("/department",departmentRouter)
 
 // Server Started -------->>>>>>.
 app.listen(port, () => {

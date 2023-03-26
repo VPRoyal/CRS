@@ -30,15 +30,12 @@
     grid-column: 5 / span 3;
 }
 .head .item:nth-child(3), .body .item:nth-child(3){
-    grid-column: 8 / span 3;
+    grid-column: 8 / span 5;
 }
 .head .item:nth-child(4), .body .item:nth-child(4){
-    grid-column: 11 / span 2;
-}
-.head .item:nth-child(5), .body .item:nth-child(5){
     grid-column: 13 / span 3;
 }
-.head .item:nth-child(6), .body .item:nth-child(6){
+.head .item:nth-child(5), .body .item:nth-child(5){
     grid-column: 16 / span 1;
 }
 .head{
@@ -49,6 +46,7 @@
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     color: white;
+    font-weight: 600;
 }
 .head .item{
     padding: 5px 0px;
