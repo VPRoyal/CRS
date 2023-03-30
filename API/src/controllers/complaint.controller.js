@@ -1,7 +1,14 @@
 require('mongoose')
 // const auth = require("../middlewares/AuthJWT.mid")
-const {add_complain} = require("../services/complaint.service")
-
+const {add_complain, get_complains} = require("../services/complaint.service")
+exports.get_complainsID= async (req, res)=>{
+    const filter="", projection="id"
+    try {
+        const complains =await get_complains({filter, projection, skip:req.body.page*req.body.limit, limit:req.body.limit})
+    } catch (err) {
+        
+    }
+}
 exports.register = async (req, res) => {
     // Some more fields need to be added and validated.
     const data={
