@@ -1,10 +1,11 @@
 import CCard from './CCard'
 import Filter from './Filter'
 import styles from './CContainer.module.css'
-import {useFetchComplainsID} from '../../hooks/useFetchComplainsID'
+import useFetchComplainsID from '../../hooks/useFetchComplainsID'
 
-export default function CContainer({cards}) {
-  console.log("hi",cards)
+export default function CContainer() {
+  const [data,err]= useFetchComplainsID(1,10)
+
   return (
     <div className={styles.main} >
       <div id={styles.left}>
@@ -21,17 +22,5 @@ export default function CContainer({cards}) {
     </div>
   )
 }
-export async function getServerSideProps() {
-  // Call an external API endpoint to get posts
-  console.log("server",process.env.REACT_APP_APIURL)
-  const cards= useFetchComplainsID()
 
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
-  return {
-    props: {
-      cards,
-    },
-  }
-}
 

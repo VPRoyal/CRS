@@ -5,9 +5,10 @@ const Complain=require("../models/complaint.modal")
 const get_complains = async (query)=>{
     if(query.hasOwnProperty("skip")||query.hasOwnProperty("limit")){
         var limit=query.limit || 10, skip=query.skip || 0
-        return Complain.find(query.filters,query.projection).skip(parseInt(skip)).limit(parseInt(limit))
+        return Complain.find(query.filter,query.projection,{skip:skip,limit:limit})
     }
-    return Complain.find(query.filters,query.projections)
+    else
+        return Complain.find(query.filter,query.projection)
 }
 const get_complain = async (query)=>{
     if(query.id){
