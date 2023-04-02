@@ -4,7 +4,7 @@ const section = new Schema({
         type:String,
         required: true,
         unique:true,
-        index:true
+        sparse:true
     },
     secName:{
         type:String,

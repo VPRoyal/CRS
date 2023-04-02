@@ -3,9 +3,17 @@ const departmentControl=require("../controllers/department.controller")
 const departmentRouter=express.Router();
 
 
-// ROUTE on '/department/register' ------------->>>>>>>>>>
+
+// ROUTE on '/department/' ------------->>>>>>>>>>
 departmentRouter.route("/")
-.post(departmentControl.add_field)
+.get(departmentControl.get_division)
+.post(departmentControl.add_department)
+
+// ROUTE on '/department/section/' ------------->>>>>>>>>>
+departmentRouter.route("/section/")
+.post(departmentControl.add_section)
+
+
 
 
 
