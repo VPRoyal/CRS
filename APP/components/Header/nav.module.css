@@ -5,6 +5,7 @@
     flex-direction: row;
     display: flex;
     align-items: flex-end;
+    z-index: 3;
 }
 .box{
     display: inline-block;

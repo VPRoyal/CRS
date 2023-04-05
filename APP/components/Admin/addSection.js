@@ -1,17 +1,16 @@
 import { useState, useRef } from 'react'
 import axios from 'axios'
-import styles from './section.module.css'
+import styles from './addSection.module.css'
 import Select from '../Customs/Select'
 import useFetchDivisions from '../../hooks/useFetchDivisions'
-export default function section() {
+export default function addSection() {
   const departmentForm = useRef()
   const sectionForm = useRef()
   const [departID, setDepartID] = useState(null)
   const [reset,setReset]=useState(0)
   const [division, err, isFetching] = useFetchDivisions()
   const [departments, sections] = division()
-  // const [depart, setDepart]=useState(false)
-  // const [sec, setSec]=useState(false)
+  
   const handleReset = (e) => {
     var elem = e.target
     if (elem.name === "department")
@@ -37,7 +36,7 @@ export default function section() {
       secName: sec.secName.value,
       function: sec.function.value
     },
-    departID:"abc"
+    departID:departID
   }
   }
   const handlePost = (elem,data,field) => {

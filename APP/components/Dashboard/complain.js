@@ -1,50 +1,51 @@
-import React, { useState, useRef } from 'react'
+import { useState, useRef } from 'react'
+import axios from 'axios'
 import styles from './complain.module.css'
 import Select from '../Customs/Select'
+import useFetchDivisions from '../../hooks/useFetchDivisions'
 export default function complain() {
     const [file, setFile] = useState();
-    const [reset,setReset]=useState(0)
-    const [section,setSection]=useState(0)
-    const [submit, setSubmit]=useState(false)
-    const Form =useRef()
-    const handleReset=()=>{
+    const [reset, setReset] = useState(0)
+    const [section, setSection] = useState(0)
+    const [division, err, isFetching] = useFetchDivisions()
+    const [departments, sections] = division()
+    const Form = useRef()
+
+    const handleReset = () => {
         Form.current.reset()
         setReset((reset) => reset + 1)
         setFile(null)
     }
-    const handleSubmit=(e)=>{
-        e.preventDefault()
-        if(submit)
-            return null
-        setSubmit(true)
+    const handleData =()=>{
+        const elem = Form.current.elements
         // Here I have to put some validations and entry of required fields.
-        var elem = Form.current.elements
-        const data={
-            id:"0034",
-            studentId:"2019UMT1500",
-            title:elem.title.value,
-            type:elem.radio1.checked?"public":"private",
-            section:section,
-            activeOfficer:"ID of active officer",
-            desc:elem.desc.value,
-            file:file
+        return {
+            id: "Will be generated",
+            studentId: "Will be Fetched from Cookies",
+            title: elem.title.value,
+            public: elem.radio1.checked,
+            secID: section,
+            desc: elem.desc.value,
+            file: file
         }
-        handleReset()
-        fetch('http://localhost:5000/complain/register/', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        }).then((res) => res.json())
-            .then((data) => {
-                setSubmit(false)
-                console.log(data)
-            })
-            .catch((err) => {
-                setSubmit(false)
-                console.log(err.message);
-            });
+    }
+    const handlePost = (elem,data) => {
+        axios.post('http://localhost:5000/complain/register/', data)
+          .then((res) => {})
+          .catch((err) => {})
+          .finally(() => {
+            elem.innerHTML="Submit"
+          });
+      }
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const elem = e.target
+        elem.innerHTML="Submitting"
+        const data=handleData()
+        // handlePost(elem, data)
+        console.log(data)
+        // handleReset()
+        
     }
     return (
         <div className={styles.wrapper} >
@@ -76,7 +77,7 @@ export default function complain() {
                     </div>
                     <div className={styles.column} id={styles.section}>
                         <h3>Concerned Section</h3>
-                        <Select reset={reset} title="Add Section" type="A" options={["DSW", "Academic", "Sports", "Scholarship", "ID Card"]} databack={(val) => { setSection(val) }} />
+                        <Select reset={reset} title="Add Section" type="A" options={sections} databack={(val) => { setSection(val) }} />
                     </div>
                     <div className={styles.column} id={styles.description} >
                         <h3>Description</h3>
@@ -97,7 +98,7 @@ export default function complain() {
                     </div>
                 </form>
                 <div className={styles.button} >
-                    <button onClick={handleSubmit} type="submit">{submit?"Submitting...":"Submit"}</button>
+                    <button onClick={handleSubmit} type="submit">Submit</button>
                     <button onClick={handleReset} type="reset">Reset</button>
                 </div>
             </div>

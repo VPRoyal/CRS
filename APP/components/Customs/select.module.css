@@ -8,10 +8,10 @@
     justify-content: space-between;
     /* background-color: rgba(18, 52, 206,0.8); */
     color: var(--grey_black);
-    outline: 1px solid var(--grey_black);
+    outline: 1px solid #39424ed8;
     font-size: 14px;
-    font-weight: 600;
-    padding: 5px 8px;
+    font-weight: 300;
+    padding: 3px 5px;
     border-radius: 4px;
     width: fit-content;
     column-gap: 20px;

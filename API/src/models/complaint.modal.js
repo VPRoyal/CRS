@@ -7,8 +7,8 @@ const complaint= new Schema({
         unique:true,
         index:true
     },
-    type:{
-        type:String,
+    public:{
+        type:Boolean,
         required: true,
     },
     title:{

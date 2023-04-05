@@ -1,9 +1,9 @@
 import React from 'react'
-import Section from '../../components/Admin/section'
+import AddSection from '../../components/Admin/addSection'
 export default function addsection() {
   return (
     <>
-        <Section/>
+        <AddSection/>
     </>
   )
 }

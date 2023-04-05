@@ -129,3 +129,27 @@ text-decoration: underline;
 #remember{
     cursor: pointer;
 }
+
+.type{
+    display: flex;
+    column-gap: 10px;
+    width: 100%;
+}
+.type input[type="radio"]:checked+label{
+    background-color: var(--yellow);
+    color: white;
+    border-color: var(--border_yellow);
+}
+#type_1, #type_2, #type_3{
+    display: none;
+}
+.type_label{
+    font-size: 16px;
+    padding:3px 5px;
+    width: 70px;
+    text-align: center;
+    border: solid 1px var(--border_black);
+    border-radius:8px;
+    color: var(--grey_black);
+    cursor: pointer;
+}
