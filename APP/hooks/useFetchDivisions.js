@@ -12,20 +12,27 @@ const useFetchDivisions = () => {
                   setErr({ name: err.name, message: err.message, code: err.code })
             }).finally(() => { setFetching(false) })
       }
-      const division = () => {
-            var sections = [], departments = []
+      const division = (type="department", id=null) => {
+            var sections = [], departments = [], sectionByDepartID={}
             if (data) {
                   data.forEach(val => {
                         departments.push({ departID: val.departID, departName: val.departName })
                         sections.push(...val.section)
+                        sectionByDepartID[val.departID]={
+                              departName:val.departName,
+                              sections:val.section}
                   });
+            if(type==="department") return departments
+            else if(type==="section"&&!id) return sections
+            else if(type==="section"&&id&&sectionByDepartID.hasOwnProperty(id)) return sectionByDepartID[id]
+            else []
             }
-            return [departments, sections]
+            return []
       }
       useEffect(() => {
 
             fetch()
       }, [])
-      return [division, err, isFetching]
+      return [isFetching,division, err]
 }
 export default useFetchDivisions;

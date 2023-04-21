@@ -40,6 +40,7 @@
 .head .item:nth-child(3),
 .body .item:nth-child(3) {
     grid-column: 7 / span 2;
+    text-transform: capitalize;
 }
 
 .head .item:nth-child(4),
@@ -112,7 +113,7 @@
     width:25px;
 }
 
-.contact input {
+/* .contact input {
     -moz-appearance: textfield;
     border: none;
     border: solid 1px var(--border_blue);
@@ -126,7 +127,7 @@
 
 .contact input:disabled {
     border: none;
-}
+} */
 
 .contact div {
     width: 100%;
@@ -134,7 +135,10 @@
 }
 
 .contact span {
-    width: 30%;
+    width: 20%;
+}
+.contact div span:first-child{
+    color: var(--grey_black);
 }
 
 .icon svg,
@@ -194,6 +198,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 30px;
+
 }
 
 .footer .show {
@@ -202,11 +207,16 @@
     justify-content: center;
     column-gap: 10px;
     font-size: 20px;
-    cursor: pointer;
+    color: var(--grey_black);
+    font-weight: bold;
 }
 
 .footer .icon {
     width: 20px;
+}
+
+.footer .icon:hover svg path{
+    stroke: var(--blue);
 }
 /* .userUpdate{
     border: solid 1px black;

@@ -1,62 +1,52 @@
 require('mongoose')
 // const auth = require("../middlewares/AuthJWT.mid")
-const {get_profiles, add_profile, update_profile, get_profile, auth_profile} = require("../services/profile.service")
+const { get_profiles, add_profile, update_profile, get_profile, auth_profile, count_profile } = require("../services/profile.service")
 
 // 
 exports.get_users = async (req, res) => {
-try {
-    if(req.hasOwnProperty("accountType")){
-        var filters={name:{$regex: '^' + req.name, $options: 'i'}},projections
-        if(req.accountType==="student")
-            projections='id, name, activeComplains, pendingComplains contact'
-        else if(req.accountType==="authority")
-            projections='id, name, post, accountType, contact, activeSections'
-        else
-            res.json({message:"Invalid Request", error:"true"})
-        const Profile = await get_profiles(filters, projections, req.options)
+    try {
+        const { role = ['student', 'staff', 'faculty'], inactive = false, search = "", page = 1 } = req.query
+        const filter = {
+            active: inactive === "true" ? false : { $in: [true, false] },
+            role: { $in: role },
+            $or: [
+                { id: { $regex: `^${search}`, $options: "i" } },
+                { name: { $regex: `^${search}`, $options: "i" } },
+            ],
+            // registration:true
+        }
+        const projection = "id name post role contact active"
+        const Profile = await get_profiles({ filter, projection, page })
+        const CountProfile = await count_profile({ filter })
+        res.json({ profile: Profile, maxPage: Math.ceil(CountProfile / 10) })
+
+    } catch (err) {
+        // res.status(500).send("Internal Server Error", err)
+        console.log("Internal Server", err)
+        res.status(500).send(err)
+    }
+}
+exports.get_userById = async (req, res) => {
+    try {
+        const filter = { id: req.params.id }
+        const projection = "id name post role contact active activeSections department"
+        const Profile = await get_profile({ filter, projection })
         res.json(Profile)
     }
-    else{
-        res.json({message:"Invalid Request", error:"true"})
-    }
-            
-}catch (err) {
-// res.status(500).send("Internal Server Error")
-res.status(500).send(err)
-}
-}
-exports.get_userById =async(req,res)=>{
-    console.log(req.query.accountType)
-    try{
-        if(req.query.hasOwnProperty("accountType")){
-            var filters={id:req.params.id,},projections
-            if(req.query.accountType==="student")
-                projections='id, name, activeComplains, pendingComplains contact'
-            else if(req.query.accountType==="authority")
-                projections='id, name, post, accountType, contact, activeSections'
-            else
-                res.json({message:"Invalid Request", error:"true"})
-            const Profile = await get_profile(filters, projections, req.options)
-            res.json(Profile)
-        }
-        else{
-            res.json({message:"Invalid Request", error:"true"})
-        }
-    }
-    catch{
-
+    catch(err) {
+        res.json({ message: "Invalid Request", success: "false", err:err})
     }
 }
 exports.login = async (req, res) => {
     // Email should be validate here. Also parameters should be validate and filtered for any mongodb injection.
-    
-    const remember=req.body.remember
-    try{
-        const login = await auth_profile({"id":req.body.id,"password":req.body.pass})
+
+    const remember = req.body.remember
+    try {
+        const login = await auth_profile({ "id": req.body.id, "password": req.body.pass })
         res.json(login)
     }
-    catch(err){
-        console.log("Error: "+err)
+    catch (err) {
+        console.log("Error: " + err)
     }
 }
 
@@ -71,21 +61,20 @@ exports.create_user = async (req, res) => {
 }
 exports.register = async (req, res) => {
     // Email should be validate here. Also parameters should be validate and filtered for any mongodb injection.
-    
     try {
-        const register= await add_profile(req.body)
-        res.json({"profile":register, "registered":true,"message":"Successfuly registered"})
+        const register = await add_profile(req.body)
+        res.json({ "profile": register, "registered": true, "message": "Successfuly registered" })
     } catch (err) {
-        console.log("Error: "+err)
+        console.log("Error: " + err)
     }
 }
 
 // PUT reqest handle
-exports.change_pass =async (req,res)=>{
-    const filter= {"id":req.body.id}
-    const update={"password":req.body.pass}
-    try{
-        await update_profile({filter, update})
+exports.change_pass = async (req, res) => {
+    const filter = { "id": req.body.id }
+    const update = { "password": req.body.pass }
+    try {
+        await update_profile({ filter, update })
         res.send("Success")
     }
     catch (err) {

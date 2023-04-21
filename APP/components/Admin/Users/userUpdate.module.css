@@ -107,21 +107,40 @@
 .form{
     display: flex;
     justify-content: space-between;
+    /* flex-wrap: wrap; */
     width: 100%;
     /* border: solid 1px var(--border_blue); */
     column-gap: 20px;
 }
-.personal{
+.profile{
     border: solid 1px var(--border_blue);
     padding: 20px 20px;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-direction: column;
+    column-gap: 10px;
     row-gap: 20px;
     width: 50%;
     border-radius: 5px;
-    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
-
+    /* min-width: 585px; */
+}
+.profileBox{
+    /* border: solid 1px var(--border_blue); */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    width: 100%;
+    border-radius: 5px;
+}
+.profile input[name="id"]{
+    text-transform: uppercase;
+}
+.profile input[name="role"], .profile input[name="name"], .profile input[name="post"]{
+    text-transform: capitalize;
+}
+.profile input[name="email"]{
+    text-transform: lowercase;
 }
 .departmental{
     border: solid 1px var(--border_blue);
@@ -199,7 +218,7 @@ justify-content: center;
 }
 .column{
     display: flex;
-    width: 50%;
+    max-width: 50%;
     flex-direction: column;
     row-gap: 10px;
 }
@@ -227,7 +246,7 @@ justify-content: center;
     border: none;
 }
 .level input{
-    width: 90px;
+    width: 60px;
     min-width: unset;
     height: 30px;
     text-align: center;
@@ -240,11 +259,15 @@ justify-content: center;
     color: var(--blue);
     outline: solid 2px var(--blue);
 }
+.footer{
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+}
 .button{
     display: flex;
     margin-left: auto;
     width: fit-content;
-    margin-top: 20px;
     padding: 10px 0px;
     column-gap: 20px;
     width: 50%;

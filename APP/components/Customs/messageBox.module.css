@@ -1,0 +1,10 @@
+.wrap{
+    display: inline-block;
+    width: fit-content;
+    min-width: 150px;
+    border-radius: 5px;
+    padding: 5px;
+    outline: 2px solid red;
+    font-size: 14px;
+    font-weight: 300;
+}

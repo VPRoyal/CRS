@@ -71,3 +71,18 @@
     color: white;
     background-color: var(--grey_black);
 }
+.disable ul label:last-child,.disable ul:last-child{
+    display: none;
+}
+.disable ul:first-child{
+    justify-content: center;
+    background-color: var(--border_black);
+    outline: none;
+    align-items: center;
+    padding: 5px;
+    font-weight: 600;
+    min-width: 150px;
+}
+.disable ul:first-child label{
+    color: var(--black);
+}

@@ -14,33 +14,32 @@ const profile= new Schema({
     post:{
         type:String,
         required: true,
+        default:"NA"
     },
-    accountType:{
+    role:{
         type:String,
         required: true,
     },
     contact:{
         email:{
             type:String,
-            required:true
+            default:"NA"
         },
         phone:{
             type:Number,
-            required:true
+            default:000
         }
     },
     password:{
         type:String,
     },
+    department:{
+        type:String,
+        default:"NA"
+    },  
     sections:[{
         id:String,
         level:Number,
-        reportingOfficers:[{
-            id:String,
-            name:String,
-            assignedDate:Date,
-            unassignedDate:Date
-        }],
         overallRatingValue:Number,
         ratings:[{
             value:Number,
@@ -53,17 +52,6 @@ const profile= new Schema({
     activeSections:[{
         id:String,
         level:Number,
-        reportingOfficers:[{
-            id:String,
-            name:String,
-            assignedDate:Date,
-            unassignedDate:Date
-        }],
-        activereportingOfficers:{
-            id:String,
-            name:String,
-            assignedDate:Date,
-        },
         ratingValue:Number,
         totalRated:Number,
         assignedDate:Date
@@ -73,6 +61,10 @@ const profile= new Schema({
         totalRated:Number
     },
     active:{
+        type:Boolean,
+        default:true
+    },
+    registration:{
         type:Boolean,
         default:false
     },

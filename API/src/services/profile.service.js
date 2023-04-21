@@ -1,19 +1,12 @@
-require('mongoose') 
 const Profile= require("../models/profile.modal")
 
 // GET Requests -------->>>>>>>>>
 const get_profiles=async(query)=>{
-    if(query.hasOwnProperty("skip")||query.hasOwnProperty("limit")){
-        var limit=options.limit || 10, skip=options.skip || 0
-        return Profile.find(query.filters,query.projection).skip(parseInt(skip)).limit(parseInt(limit))
-    }
-    return Profile.find(query.filters,query.projections)
+    const {filter, projection, page=1}=query
+    return Profile.find(filter,projection).skip((parseInt(page)-1)*10).limit(10)
 }
-const get_profile=async (query)=>{
-    if(query.id){
-        return Profile.findOne({"id":query.id},query.projection)
-    }
-    return null
+const get_profile=async ({filter, projection})=>{
+        return Profile.findOne(filter,projection)
 }
 const auth_profile =async (query)=>{
     const user= await Profile.findOne({"id":query.id},"id password").exec()
@@ -23,7 +16,10 @@ const auth_profile =async (query)=>{
     }
     return {message:"User not exist", auth:false}
 }
-
+const count_profile=async(query)=>{
+    const {filter}=query
+    return Profile.countDocuments(filter)
+}
 
 // POST Requests --------->>>>>>>>>>
 const add_profile= async (data)=>{
@@ -41,5 +37,6 @@ module.exports={
     get_profile,
     add_profile,
     auth_profile,
-    update_profile
+    update_profile,
+    count_profile
 }
