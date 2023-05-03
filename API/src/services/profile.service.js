@@ -29,14 +29,21 @@ const add_profile= async (data)=>{
 
 // PUT or UPDATE Requests ------->>>>>>>
 const update_profile=async(data)=>{
-let doc = await Profile.findOneAndUpdate(data.filter, data.update);
+    const {filter, update, optional={}}=data
+    console.log("optional", {filter, update, optional})
+let doc = await Profile.findOneAndUpdate(filter, update, optional);
 console.log(doc)
 }
+const update_profiles=async(data)=>{
+    let doc = await Profile.updateMany(data.filter, data.update, data.optional=null);
+    console.log(doc)
+    }
 module.exports={
     get_profiles,
     get_profile,
     add_profile,
     auth_profile,
     update_profile,
+    update_profiles,
     count_profile
 }

@@ -1,6 +1,6 @@
 require('mongoose')
 // const auth = require("../middlewares/AuthJWT.mid")
-const { get_profiles, add_profile, update_profile, get_profile, auth_profile, count_profile } = require("../services/profile.service")
+const { get_profiles, add_profile, update_profile, get_profile, auth_profile, count_profile, update_profiles } = require("../services/profile.service")
 
 // 
 exports.get_users = async (req, res) => {
@@ -80,4 +80,52 @@ exports.change_pass = async (req, res) => {
     catch (err) {
         res.send("Error: " + err)
     }
+}
+exports.updateProfile= async(req,res)=>{
+    //****** */ We also have to work upon error handling
+    const {id, updateProfile, department, addSection, closeSection}=req.body
+    var filter={id:id}, projection, update
+    // ******* We also have to check for profile deactivation, so that no action can be performed, if profile deactivated.
+
+
+    // Profile Update
+    if(Object.keys(updateProfile).length){
+        // **** Have to validate profile parameters. Parameters are not categorised, hence can be insecure.
+        update=updateProfile
+       await update_profile({filter, update})
+    }
+
+    // Department Change ---->>>>>>
+    if(department){
+        // Have to check if such a department exist or not...
+        // Check for sections exist...   
+        projection='activeSections'
+        const activeSection = await get_profile({ filter, projection})
+        if(activeSection) res.json({ message: "Close all sections", success: "false", err:"Logical error"})
+        update={"department":department}
+        const department= await update_profile({filter, update})
+    }
+
+    // Close Sections ----->>>>>
+    if(closeSection.length){
+        filter={id:id,'sections.id':{$in:closeSection}}
+        update={ 
+        $set: { 'sections.$[elem].unassignedDate': new Date() }
+    }
+        var optional={ arrayFilters: [{ 'elem.id': { $in: closeSection } }] }
+        const ProfileUpdate= await update_profile({filter, update, optional})
+
+        filter={ id: id }
+        update={ $pull: { activeSections: { id: { $in: closeSection } } } }
+        const ProfileRemoved=await update_profile({filter, update})
+    }
+
+    // New Sections ----->>>>>
+    if(addSection.length){
+        filter={id:id},
+        update={ $push: { activeSections: { $each: addSection }, sections: { $each: addSection } } }
+        var optional={new:true}
+        const UpdatedProfile= await update_profile({filter, update, optional})
+    }
+    res.json({message:"Successfuly Updated", success:"true"})
 }

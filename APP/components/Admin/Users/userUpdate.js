@@ -2,39 +2,52 @@ import styles from './userUpdate.module.css'
 import PersonalForm from './personalForm'
 import DepartmentalForm from './departmentalForm'
 import MessageBox from '../../Customs/messageBox'
-import { useState } from 'react'
+import { useState, useReducer, useEffect } from 'react'
+import axios from 'axios'
 import useFetchProfileByID from '../../../hooks/useFetchProfileByID'
+import {reducer, initialState, ACTIONS} from '../../../state/userUpdateReducer'
+
 export default function userUpdate({ id, onClose }) {
+    // Using complex state management---->>>>>
+    const [state, dispatch]=useReducer(reducer, initialState)
+
+    // Using Hooks---->>>>
     const [isFetching, err, profile] = useFetchProfileByID(id)
+
+    // Using States---->>>>
     const [active, setActive] = useState(true)
     const [save, setSave] = useState(false)
-    const [reset, setReset] = useState(false)
-    const [newSections, setNewSections] = useState([])
-    const [updateSections, setUpdateSections] = useState([])
-    const [message, setMessage]=useState(null)
-    const handleUpdate=(obj)=>{
-        console.log("handleUpdate")
-        if(obj.newSection){
-            setNewSections(newSections.filter((sec) => sec.secID !== obj.secID))
-        }
-        else{
-            if(obj.action==="delete"){
-                    var objects=updateSections.filter((sec)=>(sec.secID!==obj.secID && sec.action!=="update"))
-                    setUpdateSections([...objects, obj])
-            }
-            else if(obj.action==="update") setUpdateSections([...updateSections, obj])                 
+    const [refresh, setRefresh] = useState(false)
+    const Data = () => {
+        // Have to validate data over here.
+        // Check for password and confirm password.
+        return {
+            id:id,
+            updateProfile:state.profile,
+            department:state.department,
+            addSection:state.newSection,
+            closeSection:state.closeOldSection.map(sec=>sec.id)
         }
     }
-    const handleNewSection=(obj)=>{
-        console.log("objects",obj, newSections)
-        const sec=newSections
-        if(!sec||!sec.some(item => item.secID===obj.secID)){
-            setNewSections([...sec,obj])
-        }
-        else
-            console.log("second", newSections)
+    const post = (data) => {
+        axios.put('http://localhost:5000/profile/', data)
+            .then((res) => { 
+                dispatch({type:ACTIONS.MESSAGE, payload:"Profile Updated Successfuly!"})
+            })
+            .catch((err) => {
+                console.log("Error: ", err)
+                dispatch({type:ACTIONS.MESSAGE, payload:"Problems updating profile!"})
+             })
+            .finally(() => {
+                setSave(false)
+            });
     }
-    console.log("new section added", newSections)
+    const submit=()=>{
+        setSave(true)
+        const data=Data()
+        console.log(data.closeSection)
+        post(data)
+    }
     return (
         <div className={styles.wrapper} >
 
@@ -61,14 +74,14 @@ export default function userUpdate({ id, onClose }) {
 
                 </div>
                 <div className={styles.form}  >
-                    {profile && <PersonalForm editedProfile={()=>{}} profile={profile} message={(text)=>{setMessage(text)}} section={(obj)=>{handleNewSection(obj)}} />}
-                    {profile && <DepartmentalForm update={(obj)=>{handleUpdate(obj)}} sections={profile.activeSections} newSections={newSections} />}
+                    {profile && <PersonalForm profile={profile} refresh={refresh} dispatch={dispatch} state={state} />}
+                    {profile && <DepartmentalForm sections={profile.activeSections} dispatch={dispatch} state={state} />}
                 </div>
                 <div className={styles.footer} >
-                   {message && <MessageBox message={message}/>}
+                   {state.message && <MessageBox message={state.message}/>}
                 <div className={styles.button} >
-                    <button type="submit">Save</button>
-                    <button type="reset">Reset</button>
+                    <button type="submit" onClick={submit}>{save?'Saving...':'Save'}</button>
+                    <button type="reset" onClick={()=>{setRefresh(!refresh)}}>{'Reset'}</button>
                     <button type="active" style={{ backgroundColor: (active ? "" : "green") }} onClick={() => { setActive(!active) }}>{active ? "Deactivate" : "Activate"}</button>
                 </div>
                 </div>
@@ -77,3 +90,5 @@ export default function userUpdate({ id, onClose }) {
     )
 }
 
+
+//reset?'Resetting...':

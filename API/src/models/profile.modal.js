@@ -1,5 +1,30 @@
 const { model, Schema }=require('mongoose')
-
+const section =new Schema({
+    id:{
+        type:String,
+        required:true
+    },
+    name:{
+        type:String,
+        required:true
+    },
+    level:{
+        type:Number,
+        required:true
+    },
+    overallRatingValue:Number,
+    ratings:[{
+        value:Number,
+        comment:String
+    }],
+    assignedDate:{
+        type:Date,
+        default:new Date()
+    },
+    unassignedDate:{
+        type:Date,
+    }
+})
 const profile= new Schema({
     id:{
         type:String,
@@ -37,25 +62,9 @@ const profile= new Schema({
         type:String,
         default:"NA"
     },  
-    sections:[{
-        id:String,
-        level:Number,
-        overallRatingValue:Number,
-        ratings:[{
-            value:Number,
-            comment:String
-        }],
-        assignedDate:Date,
-        unassignedDate:Date
-    }]
+    sections:[section]
     ,
-    activeSections:[{
-        id:String,
-        level:Number,
-        ratingValue:Number,
-        totalRated:Number,
-        assignedDate:Date
-    }],
+    activeSections:[section],
     ratings:{
         ratingValue:Number,
         totalRated:Number

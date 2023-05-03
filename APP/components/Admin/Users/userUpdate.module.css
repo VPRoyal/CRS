@@ -250,7 +250,6 @@ justify-content: center;
     min-width: unset;
     height: 30px;
     text-align: center;
-    -moz-appearance: textfield;
     border-radius: 5px;
     border: solid 1px var(--border_black);
 }
