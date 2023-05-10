@@ -1,4 +1,9 @@
 const { model, Schema } = require('mongoose')
+const People=new Schema({
+    name:String,
+    id:String,
+    post:String
+})
 const section = new Schema({ 
     secID:{
         type:String,
@@ -43,6 +48,7 @@ const department= new Schema({
         type:String,
         required:true
     },
+    people:[People],
     section:[section],
     rating:Number,
 
