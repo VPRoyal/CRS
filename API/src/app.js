@@ -1,7 +1,8 @@
 const express=require("express"),
       http=require("http"),
       morgan=require("morgan"),
-      mongoose=require("mongoose")
+      mongoose=require("mongoose"),
+      cors =require("cors")
 
 // Routers-------->>>>>
 const departmentRouter=require("./routes/department.router");
@@ -21,6 +22,7 @@ con.on('open',()=>console.log("connected"))
 // For parsing data
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+app.use(cors())
 
 // Routing --------->>>>>
 app.use(express.static(__dirname+'/public'))

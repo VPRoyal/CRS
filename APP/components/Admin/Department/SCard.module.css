@@ -1,8 +1,18 @@
+.wrapper{
+    position: relative;
+    width: 45%;
+    height: 35px;
+    background-color: white;
+}
 .wrap{
     border: solid 1px var(--border_black);
-    width: 45%;
-    padding: 5px 10px;
     border-radius: 8px;
+    position: absolute;
+    padding: 5px 10px;
+    width: 100%;
+    top: 0%;
+    left: 0%;
+    background-color: white;
 }
 .head{
     display: flex;
@@ -117,8 +127,21 @@ justify-content: center;
 .icon:hover{
     color: var(--blue);
 }
-
-
-.body, .footer{
-    display: none;
+.icon{
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in;
+}
+.iconActive{
+transform: rotateZ(-180deg);
+}
+.wrap{
+    overflow: hidden;
+  max-height:35px;
+  z-index: 0;
+  transition: max-height 0.3s ease-in-out, z-index 0.3s ease-in-out;
+}
+.active{
+    max-height: 293.2px;
+    z-index: 5;
+    visibility: visible;
 }
