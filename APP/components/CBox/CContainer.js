@@ -12,11 +12,9 @@ export default function CContainer() {
         <Filter/>
       </div>
       <div id={styles.right}>
-        <CCard />
-        <CCard />
-        <CCard />
-        <CCard />
-        <CCard />
+        {data&&data.map((val, key)=>{
+          return <CCard key={key} id={val.id}/>
+        })}
       </div>
 
     </div>

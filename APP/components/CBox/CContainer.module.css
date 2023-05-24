@@ -9,6 +9,7 @@
     position: sticky;
     min-width: 270px;
     height: 100vh;
+    flex-shrink: 0;
     display: inline-block;
     border-right: solid rgba(18, 52, 206,0.3) 2px;
     padding: 0px 5px;
@@ -20,6 +21,7 @@
 #right{
     display: flex;
     height: 100%;
+    flex-grow: 1;
     flex-direction: column;
     row-gap: 20px;
     padding: 0px 10px;

@@ -28,7 +28,7 @@ const add_complain =async (query)=>{
 // PUT or UPDATE Requests ------->>>>>>>
 const update_complain=async(data)=>{
     let doc = await Complain.findOneAndUpdate(data.filter, data.update);
-    console.log(doc)
+    return doc
 }
 
 module.exports={

@@ -4,13 +4,15 @@ import styles from './complain.module.css'
 import Select from '../Customs/Select'
 import useFetchDivisions from '../../hooks/useFetchDivisions'
 export default function complain() {
+    const Form = useRef()
+
+    const [isFetching,division, err] = useFetchDivisions()
+    const sections = division("section")
+
     const [file, setFile] = useState();
     const [reset, setReset] = useState(0)
     const [section, setSection] = useState(0)
-    const [division, err, isFetching] = useFetchDivisions()
-    const [departments, sections] = division()
-    const Form = useRef()
-
+    
     const handleReset = () => {
         Form.current.reset()
         setReset((reset) => reset + 1)
@@ -21,10 +23,10 @@ export default function complain() {
         // Here I have to put some validations and entry of required fields.
         return {
             id: "Will be generated",
-            studentId: "Will be Fetched from Cookies",
+            studentId: "STDNT",
             title: elem.title.value,
             public: elem.radio1.checked,
-            secID: section,
+            secID: section.id,
             desc: elem.desc.value,
             file: file
         }
@@ -42,7 +44,7 @@ export default function complain() {
         const elem = e.target
         elem.innerHTML="Submitting"
         const data=handleData()
-        // handlePost(elem, data)
+        handlePost(elem, data)
         console.log(data)
         // handleReset()
         

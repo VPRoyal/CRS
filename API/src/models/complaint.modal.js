@@ -1,5 +1,27 @@
 const { model, Schema }=require('mongoose')
-
+const Thread =new Schema({
+        id:{
+            type:String,
+            required:true
+        },
+        type:{
+            type:String,
+            required:true
+        },
+        userId:{
+          type:String,
+          required:true  
+        },
+        message:{
+            type:String,
+            required:true
+        },
+        attachment: {
+            data: Buffer,
+            contentType: String
+          },
+        createdAt:Date
+})
 const complaint= new Schema({
     id:{
         type:String,
@@ -37,21 +59,15 @@ const complaint= new Schema({
         type:String,
         required:true,
     },
-    supportedStudent:[
-        {
-            id:String,
-            name:String
-        }
-    ],
-    thread:[
-        {
-            id:String,
-            type:String,
-            userId:String,
-            message:String,
-            attachement:Blob,
-            date:Date
-        }
-    ]
+    upvotes:{
+        total:Number,
+        details:[{ id:String, name:String}]
+    },
+    thread:[Thread]
 })
+complaint.pre('save', function(next) {
+    // Calculate the length of 'arrayField'
+    this.upvotes.total = this.upvotes.details.length;
+    next();
+  });
 module.exports= model("Complaint", complaint)

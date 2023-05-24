@@ -1,23 +1,18 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-const useFetchComplainsID = (page, limit) => {
+const useFetchThreadByID = (id) => {
       const [isFetching, setFetching]=useState(false)
       const [data, setData]=useState(null)
       const [err, setErr]=useState(null)
       useEffect( ()=>{
-            if(page<1) return 
             setFetching(true)
-            axios.get('http://localhost:5000/complain', {
-                  params: {
-                        page: page,
-                        limit: limit
-                  }
+            axios.get('http://localhost:5000/complain/thread/'+id, {
             }).then((res)=>{
                   setData(res.data)
             }).catch((err) => {
                   setErr({name:err.name,message:err.message, code:err.code})
             }).finally(()=>{setFetching(false)} )
-      },[page])
+      },[])
       return [data, err, isFetching]
 }
-export default useFetchComplainsID;
+export default useFetchThreadByID;

@@ -1,45 +1,46 @@
-import { Component } from 'react'
+import { Component, useState } from 'react'
 import Thread from './Thread'
 import styles from './TContainer.module.css'
-export default class TContainer extends Component {
-  constructor() {
-    super()
-    this.state = {
-      file: null
-    }
-  }
-  render() {
+import useFetchThreadByID from '../../hooks/useFetchThreadByID'
+export default function TContainer({id}) {
+  const [file,setFile]=useState(null)
+  const [data, err, isFetching]=useFetchThreadByID(id)
     return (
       <div className={styles.container} >
         <div className={styles.head} >
           <h2>Conversation Thread</h2>
         </div>
         <div className={styles.TBox} >
-          <Thread type="authority" />
+          {
+            data&&!isFetching&&data.thread.map((data, key)=>{
+                return <Thread data={data} key={key}/>
+            })
+          }
+          {/* <Thread type="authority" />
           <Thread type="student" />
           <Thread type="system" />
           <Thread type="authority" />
-          <Thread type="student" />
+          <Thread type="student" /> */}
         </div>
         <div className={styles.AnsBox}>
           <div className={styles.inputbox} >
             <div className={styles.input} > <input type="text" name="" placeholder='Write your reply' /></div>
             <div className={styles.file} >
               <div>
-                <input type="file" name="" id={styles.fileinput} onChange={(e) => { this.setState({ file: e.target.files[0] }) }} />
-                <label htmlFor={styles.fileinput} style={{ color: this.state.file ? "var(--blue)" : "var(--grey_black)" }} >
+                <input type="file" name="" id={styles.fileinput} onChange={(e) => { setFile(e.target.files[0]) }} />
+                <label htmlFor={styles.fileinput} style={{ color: file ? "var(--blue)" : "var(--grey_black)" }} >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0V3z" />
                   </svg>
                 </label>
               </div>
-              <div style={{ display: this.state.file ? "flex" : "none" }} >
-                <span onClick={() => { this.setState({ file: null }) }} ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <div style={{ display: file ? "flex" : "none" }} >
+                <span onClick={() => { setFile(null) }} ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                 </svg>
                 </span>
-                <span>{this.state.file ? this.state.file.name : ""}</span>
+                <span>{file ? file.name : ""}</span>
               </div>
             </div>
 
@@ -56,4 +57,3 @@ export default class TContainer extends Component {
       </div>
     )
   }
-}

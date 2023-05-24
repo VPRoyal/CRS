@@ -1,15 +1,11 @@
-import { Component } from 'react'
 import styles from './Thread.module.css'
-export default class Thread extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
+export default function Thread({data, key}) {
+  console.log("data: ",data, key)
     return (
-      <div className={styles.box} id={styles[this.props.type]} >
+      <div className={styles.box} id={styles[data.type]} >
         <div className={styles.main}  >
           <div className={styles.title} >
-            <span>{this.props.type == "authority" && "Authority" || this.props.type == "student" && "Student" || this.props.type == "system" && "System"}</span>
+            <span>{data.type == "authority" && "Authority" || data.type == "student" && "Student" || data.type == "system" && "System"}</span>
             <span className={styles.info} >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -19,12 +15,7 @@ export default class Thread extends Component {
             <span> replied</span>
           </div>
           <div className={styles.body} >
-            It is the column where the comment of authority or student will be shown below in the text bar.
-            It is the column where the comment of authority or student will be shown below in the text bar.
-            It is the column where the comment of authority or student will be shown below in the text bar.
-            It is the column where the comment of authority or student will be shown below in the text bar.
-            It is the column where the comment of authority or student will be shown below in the text bar.
-            It is the column where the comment of authority or student will be shown below in the text bar.
+            {data.message}
           </div>
           <div className={styles.footer} >
             <div className={styles.icons} >
@@ -55,4 +46,3 @@ export default class Thread extends Component {
       </div>
     )
   }
-}
