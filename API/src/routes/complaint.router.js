@@ -17,7 +17,9 @@ complainRouter.route("/thread/:id")
 complainRouter.route("/register/")
 .post(complainControl.register)
 
-
+// ROUTE on '/complain/action/' ------------->>>>>>>>>>
+complainRouter.route("/action/")
+.put(complainControl.action)
 
 
 module.exports=complainRouter;

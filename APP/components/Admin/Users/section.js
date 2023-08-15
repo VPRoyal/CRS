@@ -6,7 +6,6 @@ export default function section({section={}, newSection=true, dispatch, state, K
     const handleClose=()=>{
         if(newSection) dispatch({type:ACTIONS.REMOVE_NEW_SECTION, payload:{id:section.id}})
         else dispatch({type:ACTIONS.REMOVE_OLD_SECTION, payload:{id:section.id}})
-        
     }
     const handleCancel=()=>{
         dispatch({type:ACTIONS.CANCEL,payload:{id:section.id}})

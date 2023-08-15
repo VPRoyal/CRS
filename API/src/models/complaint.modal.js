@@ -53,7 +53,8 @@ const complaint= new Schema({
     officer:[String],
     level:{
         type:Number,
-        default:1
+        default:1,
+        max:4
     },
     studentId:{
         type:String,
@@ -61,11 +62,12 @@ const complaint= new Schema({
     },
     upvotes:{
         total:Number,
-        details:[{ id:String, name:String}]
+        details:[{ userID:String, userName:String}]
     },
     thread:[Thread]
 })
 complaint.pre('save', function(next) {
+    console.log("level: ", this.level)
     // Calculate the length of 'arrayField'
     this.upvotes.total = this.upvotes.details.length;
     next();

@@ -1,10 +1,15 @@
-import { Component, useState } from 'react'
+import {useState} from 'react'
 import Thread from './Thread'
 import styles from './TContainer.module.css'
 import useFetchThreadByID from '../../hooks/useFetchThreadByID'
-export default function TContainer({id}) {
+import { ACTIONS } from '../../state/cardUpdateReducer'
+export default function TContainer({dispatch, state,id}) {
   const [file,setFile]=useState(null)
+  const [message, setMessage]=useState(null)
   const [data, err, isFetching]=useFetchThreadByID(id)
+  const handleReply=()=>{
+      dispatch({type:ACTIONS.SEND_REPLY, payload:{id:id,userID:"2019UMT1500",message:message, attachment:file}})
+  }
     return (
       <div className={styles.container} >
         <div className={styles.head} >
@@ -16,15 +21,10 @@ export default function TContainer({id}) {
                 return <Thread data={data} key={key}/>
             })
           }
-          {/* <Thread type="authority" />
-          <Thread type="student" />
-          <Thread type="system" />
-          <Thread type="authority" />
-          <Thread type="student" /> */}
         </div>
         <div className={styles.AnsBox}>
-          <div className={styles.inputbox} >
-            <div className={styles.input} > <input type="text" name="" placeholder='Write your reply' /></div>
+          <form className={styles.inputbox} >
+            <div className={styles.input} > <input type="text" name="" placeholder='Write your reply' onChange={(e) => { setFile(e.target.value) }} /></div>
             <div className={styles.file} >
               <div>
                 <input type="file" name="" id={styles.fileinput} onChange={(e) => { setFile(e.target.files[0]) }} />
@@ -43,13 +43,12 @@ export default function TContainer({id}) {
                 <span>{file ? file.name : ""}</span>
               </div>
             </div>
-
-          </div>
+          </form>
           <div className={styles.iconbox} >
-            <div className={styles.icon}><span>Level Up</span><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <div className={styles.icon} onClick={()=>{dispatch({type:ACTIONS.LEVELUP,payload:{id:id, userID:"2019UMT1500"}})}}><span>Level Up</span><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
             </svg></span></div>
-            <div className={styles.icon}><span>Send</span><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <div className={styles.icon} onClick={handleReply} ><span>Send</span><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
               <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
             </svg></span></div>
           </div>

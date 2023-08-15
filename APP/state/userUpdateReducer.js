@@ -1,4 +1,3 @@
-
 const ACTIONS={
     ADD_DEPARTMENT:"add_department",
     ADD_NEW_SECTION:"add_new_section",

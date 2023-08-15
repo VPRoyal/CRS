@@ -1,6 +1,5 @@
 import styles from './Thread.module.css'
 export default function Thread({data, key}) {
-  console.log("data: ",data, key)
     return (
       <div className={styles.box} id={styles[data.type]} >
         <div className={styles.main}  >
